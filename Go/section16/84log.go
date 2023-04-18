@@ -47,10 +47,10 @@ func main() {
 	logger.Println("message")
 	log.Println("message")
 
-	_, err := os.Open("d")
+	_, err1 := os.Open("d")
 	if err != nil {
-		// log.Fatalln("Exit", err)
-		logger.Fatalln("Exit", err)
+		// log.Fatalln("Exit", err1)
+		logger.Fatalln("Exit", err1)
 	}
 
 }
