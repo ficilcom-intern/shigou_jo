@@ -107,3 +107,27 @@ func todoUpdate(w http.ResponseWriter, r *http.Request, id int) {
 		http.Redirect(w, r, "/todos", http.StatusFound)
 	}
 }
+
+func todoDelete(w http.ResponseWriter, r *http.Request, id int) {
+	session, err := session(w, r)
+	if err != nil {
+		http.Redirect(w, r, "/login", http.StatusFound)
+	} else {
+		_, err := session.GetUserBySession()
+		if err != nil {
+			log.Println(err)
+		}
+
+		todo, err := models.GetTodo(id)
+		if err != nil {
+			log.Println(err)
+		}
+
+		if err := todo.DeleteTodo(); err != nil {
+			log.Println(err)
+		}
+
+		http.Redirect(w, r, "/todos", http.StatusFound)
+	}
+
+}
